@@ -2,6 +2,7 @@ package com.generation.minhalojadegames.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,25 +32,24 @@ public class Categoria {
 	@Size (max = 100, message = "O atributo descricao deve conter no máximo 500 caractéres")
 	private String descricao;
 	
-	//decidi não colocar cascade intencionalmente
-	@OneToMany(mappedBy = "categoria")
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
-	private List <Produto> produto;
+	private List<Produto> produto;
 
-	public Long getId_categorai() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId_categorai(Long id_categorai) {
-		this.id = id_categorai;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getNome_categoria() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome_categoria(String nome_categoria) {
-		this.nome = nome_categoria;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDescricao() {

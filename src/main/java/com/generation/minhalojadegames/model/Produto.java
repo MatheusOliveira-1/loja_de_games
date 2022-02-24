@@ -1,17 +1,18 @@
 package com.generation.minhalojadegames.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -19,48 +20,70 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Produto {
 	
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	@NotBlank(message = "O atributo nome é obrigatório")
-	@Size(max = 255, message = "O nome deve ter no máximo 255 caractéres")
+	@NotNull(message = "Nome é obrigatório!")                                       										
 	private String nome;
 	
-	@NotBlank
-	private Date lancamento;
+	@NotNull(message = "Console é obrigatório!")
+	private String console;
 	
-	@NotBlank
+	private int quantidade;
+	
+	@Column(name = "data_lancamento")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataLancamento;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
+	@NotNull(message = "Preço é obrigatório!")
+	@Positive(message = "O preço deve ser maior do que zero!")
 	private BigDecimal preco;
 	
-	@NotBlank
-	private Integer quantidade;
+	private String foto;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
 
-	public Long getId_produto() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId_produto(Long id_produto) {
-		this.id = id_produto;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getNome_produto() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome_produto(String nome_produto) {
-		this.nome = nome_produto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Date getData_lancamento() {
-		return lancamento;
+	public String getConsole() {
+		return console;
 	}
 
-	public void setData_lancamento(Date data_lancamento) {
-		this.lancamento = data_lancamento;
+	public void setConsole(String console) {
+		this.console = console;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public LocalDate getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(LocalDate dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 	public BigDecimal getPreco() {
@@ -71,12 +94,12 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public Integer getQuantidade() {
-		return quantidade;
+	public String getFoto() {
+		return foto;
 	}
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public Categoria getCategoria() {
@@ -86,5 +109,7 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
+	
 
 }

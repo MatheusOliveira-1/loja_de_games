@@ -11,6 +11,7 @@ import com.generation.minhalojadegames.model.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository <Categoria, Long>{
 	
-	List <Categoria> findAllByNomeContainingIgnoreCase (String nome);
+	List <Categoria> findAllByDescricaoContainingIgnoreCase (String descricao);
+	boolean existsByNomeContainingIgnoreCase (String descricao);
 
 }
