@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -41,6 +42,9 @@ public class Produto {
 	private BigDecimal preco;
 	
 	private String foto;
+	
+	@Column(columnDefinition = "integer default 0" )
+	private int curtir;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
@@ -120,6 +124,14 @@ public class Produto {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public int getCurtir() {
+		return curtir;
+	}
+
+	public void setCurtir(int curtir) {
+		this.curtir = curtir;
 	}
 	
 	
