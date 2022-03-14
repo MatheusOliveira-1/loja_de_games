@@ -39,11 +39,12 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping("/all")
-	public ResponseEntity <List<Usuario>> getAll(){
+	public ResponseEntity<List<Usuario>> getByUsuario() {
 		
 		return ResponseEntity.ok(usuarioRepository.findAll());
-		
+			
 	}
+	
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> getById(@PathVariable Long id) {
